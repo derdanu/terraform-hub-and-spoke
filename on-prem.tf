@@ -1,5 +1,5 @@
 locals {
-  onprem-location       = "SouthCentralUS"
+  onprem-location       = var.onpremlocation
   onprem-resource-group = "onprem-vnet-rg"
   prefix-onprem         = "onprem"
 }

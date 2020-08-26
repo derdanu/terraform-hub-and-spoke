@@ -1,5 +1,5 @@
 locals {
-  spoke1-location       = "CentralUS"
+  spoke1-location       = var.azurelocation
   spoke1-resource-group = "spoke1-vnet-rg"
   prefix-spoke1         = "spoke1"
 }

@@ -1,6 +1,6 @@
 locals {
   prefix-hub-nva         = "hub-nva"
-  hub-nva-location       = "CentralUS"
+  hub-nva-location       = var.azurelocation
   hub-nva-resource-group = "hub-nva-rg"
 }
 

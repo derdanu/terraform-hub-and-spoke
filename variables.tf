@@ -1,6 +1,11 @@
-variable "location" {
-  description = "Location of the network"
-  default     = "centralus"
+variable "azurelocation" {
+  description = "Azure Location of the Cloud assets / Hub + Spoke"
+  default     = "EastUS"
+}
+
+variable "onpremlocation" {
+  description = "Azure Location of the On-Premise assets"
+  default     = "WestUS"
 }
 
 variable "username" {
