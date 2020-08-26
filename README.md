@@ -8,8 +8,8 @@ Complete Tutorial available on [Azure Docs](https://docs.microsoft.com/de-de/azu
 |-|-|
 |10.0.0.68|Hub Jumpbox|
 |10.0.0.36|Hub NVA|
-|10.0.1.68|Spoke 1 VM|
-|10.0.2.68|Spoke 2 VM|
+|10.1.0.68|Spoke 1 VM|
+|10.2.0.68|Spoke 2 VM|
 
 ## Network Diagram
 
