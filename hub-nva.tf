@@ -39,9 +39,9 @@ resource "azurerm_virtual_machine" "hub-nva-vm" {
   vm_size               = var.vmsize
 
   storage_image_reference {
-    publisher = "Canonical"
-    offer     = "UbuntuServer"
-    sku       = "16.04-LTS"
+    publisher = "MicrosoftOSTC"
+    offer     = "FreeBSD"
+    sku       = "12.0"
     version   = "latest"
   }
 
@@ -67,21 +67,22 @@ resource "azurerm_virtual_machine" "hub-nva-vm" {
   }
 }
 
-resource "azurerm_virtual_machine_extension" "enable-routes" {
-  name                 = "enable-iptables-routes"
+resource "azurerm_virtual_machine_extension" "bootstrap-opnsense" {
+  name                 = "bootstrap-opnsense"
   location             = azurerm_resource_group.hub-nva-rg.location
   resource_group_name  = azurerm_resource_group.hub-nva-rg.name
   virtual_machine_name = azurerm_virtual_machine.hub-nva-vm.name
-  publisher            = "Microsoft.Azure.Extensions"
-  type                 = "CustomScript"
-  type_handler_version = "2.0"
+  publisher            = "Microsoft.OSTCExtensions"
+  type                 = "CustomScriptForLinux"
+  type_handler_version = "1.4"
+  auto_upgrade_minor_version = false
 
   settings = <<SETTINGS
     {
         "fileUris": [
-        "https://raw.githubusercontent.com/mspnp/reference-architectures/master/scripts/linux/enable-ip-forwarding.sh"
+        "https://raw.githubusercontent.com/derdanu/terraform-hub-and-spoke/opnsense/scripts/configureopnsense.sh"
         ],
-        "commandToExecute": "bash enable-ip-forwarding.sh"
+        "commandToExecute": "sh configureopnsense.sh"
     }
 SETTINGS
 
