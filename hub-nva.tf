@@ -1,7 +1,6 @@
 locals {
-  prefix-hub-nva         = "hub-nva"
+  prefix-hub-nva         = "${var.global_prefix}-hub-nva"
   hub-nva-location       = var.azurelocation
-  hub-nva-resource-group = "hub-nva-rg"
 }
 
 resource "azurerm_resource_group" "hub-nva-rg" {

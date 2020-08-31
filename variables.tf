@@ -3,6 +3,11 @@ variable "azurelocation" {
   default     = "EastUS"
 }
 
+variable "global_prefix" {
+  description = "Global Prefix"
+  default     = "HAS"
+}
+
 variable "onpremlocation" {
   description = "Azure Location of the On-Premise assets"
   default     = "WestUS"

@@ -1,11 +1,10 @@
 locals {
   onprem-location       = var.onpremlocation
-  onprem-resource-group = "onprem-vnet-rg"
-  prefix-onprem         = "onprem"
+  prefix-onprem         = "${var.global_prefix}-onprem"
 }
 
 resource "azurerm_resource_group" "onprem-vnet-rg" {
-  name     = local.onprem-resource-group
+  name     = "${local.prefix-onprem}-rg"
   location = local.onprem-location
 }
 
