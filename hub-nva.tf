@@ -79,7 +79,7 @@ resource "azurerm_virtual_machine_extension" "bootstrap-opnsense" {
   settings = <<SETTINGS
     {
         "fileUris": [
-        "https://raw.githubusercontent.com/derdanu/terraform-hub-and-spoke/opnsense/scripts/configureopnsense.sh"
+        "https://raw.githubusercontent.com/derdanu/terraform-hub-and-spoke/master/scripts/configureopnsense.sh"
         ],
         "commandToExecute": "sh configureopnsense.sh"
     }
