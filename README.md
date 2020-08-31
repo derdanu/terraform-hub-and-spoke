@@ -13,7 +13,10 @@ Complete Tutorial available on [Azure Docs](https://docs.microsoft.com/de-de/azu
 
 ## Network Diagram
 
-Please note the NVA for Spoke transient routing is missing in the HUB VNet diagram. This script deploys an opnsense NVA. 
+Please note the NVA for Spoke transient routing is missing in the HUB VNet diagram. This script deploys an OPNsense NVA. 
 You can log into the On-Prem VM (terraform output) and you should be able to ping all the VMs
 
 ![Azure Hub and Spoke](https://docs.microsoft.com/de-de/azure/developer/terraform/media/hub-and-spoke-tutorial-series/hub-spoke-architecture.png)
+
+## Credits
+OPNsense NVA is based on the work of https://github.com/dmauser/opnazure
