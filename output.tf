@@ -16,7 +16,7 @@ output "ssh_login_forwarding_opnsense_webinterface" {
 }
 
 output "opensense_webinterface" {
-  value = "http://127.0.0.1:4711"
+  value = "https://127.0.0.1:4711"
 }
 
 output "opensense_username" {
