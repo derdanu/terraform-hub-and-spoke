@@ -135,7 +135,7 @@ resource "azurerm_route_table" "spoke1-rt" {
   name                          = "spoke1-rt"
   location                      = azurerm_resource_group.hub-nva-rg.location
   resource_group_name           = azurerm_resource_group.hub-nva-rg.name
-  disable_bgp_route_propagation = false
+  disable_bgp_route_propagation = true
 
   route {
     name                   = "toSpoke2"
@@ -172,7 +172,7 @@ resource "azurerm_route_table" "spoke2-rt" {
   name                          = "spoke2-rt"
   location                      = azurerm_resource_group.hub-nva-rg.location
   resource_group_name           = azurerm_resource_group.hub-nva-rg.name
-  disable_bgp_route_propagation = false
+  disable_bgp_route_propagation = true
 
   route {
     name                   = "toSpoke1"
