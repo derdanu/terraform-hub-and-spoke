@@ -1,6 +1,6 @@
 locals {
-  spoke1-location       = var.azurelocation
-  prefix-spoke1         = "${var.global_prefix}-spoke1"
+  spoke1-location = var.azurelocation
+  prefix-spoke1   = "${var.global_prefix}-spoke1"
 }
 
 resource "azurerm_resource_group" "spoke1-vnet-rg" {
