@@ -116,6 +116,13 @@ resource "azurerm_route_table" "hub-gateway-rt" {
     next_hop_in_ip_address = "10.0.0.36"
   }
 
+  route {
+    name                   = "onprem"
+    address_prefix         = "192.168.0.0/16"
+    next_hop_type          = "VirtualAppliance"
+    next_hop_in_ip_address = "10.0.0.36"
+  }
+
   tags = {
     environment = local.prefix-hub-nva
   }
@@ -143,7 +150,8 @@ resource "azurerm_route_table" "spoke1-rt" {
   route {
     name           = "default"
     address_prefix = "0.0.0.0/0"
-    next_hop_type  = "vnetlocal"
+    next_hop_type          = "VirtualAppliance"
+    next_hop_in_ip_address = "10.0.0.36"
   }
 
   tags = {
@@ -179,7 +187,8 @@ resource "azurerm_route_table" "spoke2-rt" {
   route {
     name           = "default"
     address_prefix = "0.0.0.0/0"
-    next_hop_type  = "vnetlocal"
+    next_hop_type          = "VirtualAppliance"
+    next_hop_in_ip_address = "10.0.0.36"
   }
 
   tags = {
