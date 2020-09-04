@@ -68,6 +68,7 @@ resource "azurerm_virtual_machine" "hub-nva-vm" {
 
 resource "azurerm_virtual_machine_extension" "bootstrap-opnsense" {
   name                       = "bootstrap-opnsense"
+  virtual_machine_id         = azurerm_virtual_machine.hub-nva-vm.id
   publisher                  = "Microsoft.OSTCExtensions"
   type                       = "CustomScriptForLinux"
   type_handler_version       = "1.4"
