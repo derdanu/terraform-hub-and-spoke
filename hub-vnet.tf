@@ -1,7 +1,7 @@
 locals {
-  prefix-hub         = "${var.global_prefix}-hub"
-  hub-location       = var.azurelocation
-  shared-key         = "4-v3ry-53cr37-1p53c-5h4r3d-k3y"
+  prefix-hub   = "${var.global_prefix}-hub"
+  hub-location = var.azurelocation
+  shared-key   = "4-v3ry-53cr37-1p53c-5h4r3d-k3y"
 }
 
 resource "azurerm_resource_group" "hub-vnet-rg" {

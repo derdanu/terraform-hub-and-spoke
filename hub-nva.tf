@@ -1,6 +1,6 @@
 locals {
-  prefix-hub-nva         = "${var.global_prefix}-hub-nva"
-  hub-nva-location       = var.azurelocation
+  prefix-hub-nva   = "${var.global_prefix}-hub-nva"
+  hub-nva-location = var.azurelocation
 }
 
 resource "azurerm_resource_group" "hub-nva-rg" {
@@ -67,13 +67,11 @@ resource "azurerm_virtual_machine" "hub-nva-vm" {
 }
 
 resource "azurerm_virtual_machine_extension" "bootstrap-opnsense" {
-  name                 = "bootstrap-opnsense"
-  location             = azurerm_resource_group.hub-nva-rg.location
-  resource_group_name  = azurerm_resource_group.hub-nva-rg.name
-  virtual_machine_name = azurerm_virtual_machine.hub-nva-vm.name
-  publisher            = "Microsoft.OSTCExtensions"
-  type                 = "CustomScriptForLinux"
-  type_handler_version = "1.4"
+  name                       = "bootstrap-opnsense"
+  virtual_machine_id         = azurerm_virtual_machine.hub-nva-vm.id
+  publisher                  = "Microsoft.OSTCExtensions"
+  type                       = "CustomScriptForLinux"
+  type_handler_version       = "1.4"
   auto_upgrade_minor_version = false
 
   settings = <<SETTINGS
@@ -116,6 +114,13 @@ resource "azurerm_route_table" "hub-gateway-rt" {
     next_hop_in_ip_address = "10.0.0.36"
   }
 
+  route {
+    name                   = "onprem"
+    address_prefix         = "192.168.0.0/16"
+    next_hop_type          = "VirtualAppliance"
+    next_hop_in_ip_address = "10.0.0.36"
+  }
+
   tags = {
     environment = local.prefix-hub-nva
   }
@@ -131,7 +136,7 @@ resource "azurerm_route_table" "spoke1-rt" {
   name                          = "spoke1-rt"
   location                      = azurerm_resource_group.hub-nva-rg.location
   resource_group_name           = azurerm_resource_group.hub-nva-rg.name
-  disable_bgp_route_propagation = false
+  disable_bgp_route_propagation = true
 
   route {
     name                   = "toSpoke2"
@@ -141,9 +146,10 @@ resource "azurerm_route_table" "spoke1-rt" {
   }
 
   route {
-    name           = "default"
-    address_prefix = "0.0.0.0/0"
-    next_hop_type  = "vnetlocal"
+    name                   = "default"
+    address_prefix         = "0.0.0.0/0"
+    next_hop_type          = "VirtualAppliance"
+    next_hop_in_ip_address = "10.0.0.36"
   }
 
   tags = {
@@ -167,7 +173,7 @@ resource "azurerm_route_table" "spoke2-rt" {
   name                          = "spoke2-rt"
   location                      = azurerm_resource_group.hub-nva-rg.location
   resource_group_name           = azurerm_resource_group.hub-nva-rg.name
-  disable_bgp_route_propagation = false
+  disable_bgp_route_propagation = true
 
   route {
     name                   = "toSpoke1"
@@ -177,9 +183,10 @@ resource "azurerm_route_table" "spoke2-rt" {
   }
 
   route {
-    name           = "default"
-    address_prefix = "0.0.0.0/0"
-    next_hop_type  = "vnetlocal"
+    name                   = "default"
+    address_prefix         = "0.0.0.0/0"
+    next_hop_type          = "VirtualAppliance"
+    next_hop_in_ip_address = "10.0.0.36"
   }
 
   tags = {
